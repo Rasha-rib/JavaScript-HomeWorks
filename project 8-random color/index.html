@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background-color: black;
+        }
+        #color-container{
+            width: 200px;
+            height: 200px;
+        }
+        div.text-container{
+            width: 200px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        div.text-container p{
+            color: white;
+            text-align: center;
+        }
+        button{
+            border-radius: 5px;
+            padding: 1px 3px;
+            background-color: tomato;
+            font-size: 14px;
+            border: 1px solid black;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(253, 176, 162);
+            color: white;
+            border: 1px solid white;
+            box-shadow: 0px 0px 17px -2px rgba(255,255,255,1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="color-container">
+            
+        </div>
+        <div class="text-container">
+            <button onclick="colorChanger()">Change color</button>
+            <p id="text"></p>
+        </div>
+    </div>
+    <script>
+        let colorChanger = function(){
+            let r = Number(Math.floor(Math.random()*256));
+            let g = Number(Math.floor(Math.random()*256));
+            let b = Number(Math.floor(Math.random()*256));
+            document.getElementById("color-container").style.backgroundColor = `rgb(${r},${g},${b})`;
+            document.getElementById("text").innerText = `This color is rgb(${r},${g},${b}).`
+        }
+    </script>
+</body>
+</html>

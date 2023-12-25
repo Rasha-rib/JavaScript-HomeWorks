@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: rgb(31, 31, 31);
+        }
+        #progress-bar-container{
+            height: 10px;
+            background-color: rgb(31,31,31);
+            position: fixed;
+            top: 0px;
+            width: 100%;
+        }
+        #progress{
+            height: 100%;
+            width: 0%;
+            background-color: tomato;
+            transition: width 0.3s ease-in-out;
+        }
+        div.space{
+            width: 100%;
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar-container">
+        <div id="progress"></div>
+    </div>
+    <div class="space">
+    </div>
+    <script>
+        window.addEventListener("scroll",()=>{
+            let progressBar = document.getElementById("progress");
+            let scrollHeight = document.body.scrollHeight - window.innerHeight;
+            let scrollPosition = window.scrollY;
+            let progressRatio = scrollPosition/scrollHeight;
+
+            progressBar.style.width = `${progressRatio * 100}%`;
+        })
+    </script>
+</body>
+</html>

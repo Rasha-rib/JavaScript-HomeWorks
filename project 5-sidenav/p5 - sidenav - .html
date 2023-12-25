@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- ******************************************* script *******************************************
+*************************************************************************************************** -->
+
+
+
+    <style>
+        @font-face {
+    font-family: "regular";
+    src: url("./p5 - sidenav - Fonts/Regular/Poppins-Regular.eot");
+    src: url("./p5 - sidenav - Fonts/Regular/Poppins-Regular.eot") format("embedded-opentype"),
+    url("./p5 - sidenav - Fonts/Regular/Poppins-Regular.woff") format("woff"),
+    url("./p5 - sidenav - Fonts/Regular/Poppins-Regular.woff") format("woff2"),
+    url("./p5 - sidenav - Fonts/Regular/Poppins-Regular.ttf") format("truetype");
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --clr: #222327;
+}
+body{
+    background-color: var(--clr);
+}
+div.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.menu-container{
+    width: 1140px;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+div.navigation{
+    width: 900px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+}
+div.navigation ul{
+    display: flex;
+    width: 350px;
+    
+}
+div.navigation ul li{
+    list-style: none;
+    position: relative;
+    width: 70px;
+    height: 70px;
+    z-index: 1;
+    
+}
+div.navigation ul li a{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    font-family: "regular";
+    font-size: 13px;
+}
+div.navigation ul li a .icon{
+    position: relative;
+    display:block;
+    line-height: 75px;
+    font-size: 25px;
+    text-align: center;
+    transition: 0.5s;
+    color: var(--clr);
+}
+div.navigation ul li:hover a .icon{
+    transform: translateY(-15px);
+    font-size: 27px;
+    color: tomato;
+}
+div.navigation ul li a .text{
+    position: absolute;
+    color: var(--clr);
+    letter-spacing: 3px;
+    transition: 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+div.navigation ul li:hover a .text{
+    opacity: 1;
+    transform: translateY(10px);
+    color: tomato
+}
+#sideNavButton{
+    font-family: "regular";
+    padding: 5px;
+    background-color: white;
+    border-radius: 12px;
+    border: 2px solid black;
+    transition: 0.5s;
+    font-size: 12px;
+}
+#sideNavButton:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: tomato;
+    font-size: 13px;
+    box-shadow: 0px 0px 56px -19px rgba(255,255,255,1);
+}
+#sideNav{
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    background-color: tomato;
+    right: -300px;
+    top: 0px;
+    z-index: 2;
+    border: 2px solid var(--clr);
+    transition: 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#sideNavButtonClose{
+    font-size: 20px;
+    background-color: tomato;
+    border: none;
+    transition: 0.5s;
+}
+#sideNavButtonClose:hover{
+    font-size: 23px;
+    color: white;
+}
+.sidenav-close-button-container{
+    height: 10%;
+    width: 100%;
+}
+.sidenav-list-container{
+    height: 90%;
+    width: 100%;
+    text-align: right;
+    padding: 5px;
+}
+.sidenav-list-container ul{
+    display: flex;
+    flex-direction: column;
+}
+.sidenav-list-container ul li{
+    list-style: none;
+    font-family: "regular";
+    height: 50px;
+    transition: 0.5s;
+}
+.sidenav-list-container ul li a{
+    text-decoration: none;
+    color: var(--clr);
+    transition: 0.5s;
+}
+.sidenav-list-container ul li:hover{
+    color: white;
+    transform: translateX(-20px);
+}
+.sidenav-icon{
+    width: 11px;
+    height: 11px;
+    background-color: tomato;
+    display: inline-block;
+    border-left: 2px solid var(--clr);
+    border-top: 2px solid var(--clr);
+    border-top-left-radius: 3px;
+    transform: rotate(-45deg);
+    transition: 0.5s;
+}
+.sidenav-list-container ul li:hover .sidenav-icon{
+    transform: rotate(135deg);
+}
+
+    </style>
+    <title>Document</title>
+</head>
+
+
+
+
+<!-- ******************************************* HTML *******************************************
+*************************************************************************************************** -->
+<body>
+
+
+
+
+    <div class="container">
+        <div class="menu-container">
+            <div class="navigation">
+                <ul>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="text">HOME</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </span>
+                            <span class="text">PROFILE</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="chatbubble-outline"></ion-icon>
+                            </span>
+                            <span class="text">MESSAGE</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="camera-outline"></ion-icon>
+                            </span>
+                            <span class="text">PHOTOS</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </span>
+                            <span class="text">SETTING</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button id="sideNavButton" onclick="openSideNav()">open menu</button>
+        </div>
+        <section id="sideNav">
+            <div class="sidenav-close-button-container">
+                <button id="sideNavButtonClose" onclick="closeSideNav()">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+            <div class="sidenav-list-container">
+                <ul>
+                    <li>
+                        <a href="#"><span class="sidenav-icon"></span> HOME</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="sidenav-icon"></span> OTHER PAGE</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="sidenav-icon"></span> REFERENCES</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="sidenav-icon"></span> AUTHOR</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+
+
+<!-- ******************************************* script *******************************************
+*************************************************************************************************** -->
+
+
+    <script>
+        let openSideNav = function () {
+  document.getElementById("sideNav").style.right = "0px";
+};
+let closeSideNav = function () {
+  document.getElementById("sideNav").style.right = "-300px";
+};
+    </script>
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+</body>
+</html>

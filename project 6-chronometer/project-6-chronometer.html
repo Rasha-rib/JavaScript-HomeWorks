@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <span id="hour"></span> : <span id="minute"></span> : <span id="second"></span> : <span id="msecond"></span>
+    </p>
+    <div>
+        <button onclick="startCh()">Start</button>
+        <button onclick="stopCh()">stop</button>
+        <button onclick="resetCh()">reset</button>
+        <button onclick="captureCh()">Capture</button>
+    </div>
+    <ul id="captures">
+
+    </ul>
+
+<script>
+    let h = 0;
+    let m = 0;
+    let s = 0;
+    let ms = 0;
+    var captures = [];
+
+    function updateCh(){
+        document.getElementById("msecond").innerHTML = (ms<10)? `0${ms}` : `${ms}`;
+        document.getElementById("second").innerHTML = (s<10)? `0${s}` : `${s}`;
+        document.getElementById("minute").innerHTML = (m<10)? `0${m}` : `${m}`;
+        document.getElementById("hour").innerHTML = (h<10)? `0${h}` : `${h}`;
+    }
+    
+    function countCh(){
+        ms++;
+        if(ms>1000){
+            s++;
+            ms = 0;
+        }
+        if(s>60){
+            m++;
+            s = 0;
+        }
+        if(m>60){
+            h++;
+            m = 0;
+        }
+        updateCh();
+    }
+    let chInterval = null;
+    function startCh(){
+        if(chInterval == null){
+        chInterval = setInterval(countCh,1);
+        };
+    }
+    function stopCh(){
+        clearInterval(chInterval);
+        chInterval = null;
+    }
+    function resetCh(){
+        stopCh();
+        h=0;m=0;s=0;ms=0;
+        updateCh();
+    }
+    function updateCapture(){
+        document.getElementById("captures").innerHTML = "";
+        for(let i = 0 ; i<captures.length ; i++){
+            document.getElementById("captures").innerHTML += `<li>${captures[i]}</li>`
+        }
+    }
+    function captureCh(){
+        let timeCapture = `${h}:${m}:${s}:${ms}`
+        console.log(timeCapture);
+        captures.push(timeCapture);
+        updateCapture();
+    }
+</script>
+</body>
+</html>

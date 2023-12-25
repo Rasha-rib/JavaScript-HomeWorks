@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: rgb(31,31,31);
+        }
+        div.container{
+            height: 600px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+        }
+        #glass{
+            width: 200px;
+            height: 300px;
+            background-color: rgba(255, 151, 133, 0.3);
+            border-radius: 30px 30px 10px 10px;
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        #liquid{
+            width: 100%;
+            height: 0%;
+            transition: height 0.3s ease-in-out;
+            background-color: tomato;
+            border-radius: 30px 30px 10px 10px;
+            position: absolute;
+        }
+        div.space{
+            height: 10000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="glass">
+            <div id="liquid"></div>
+        </div>
+    </div>
+    <div class="space"></div>
+    <script>
+        window.addEventListener("scroll",()=>{
+            let progressLiquid = document.getElementById("liquid");
+            let scrollHeight = document.body.scrollHeight - window.innerHeight;
+            let scrollPosition = window.scrollY;
+            let scrollRatio = scrollHeight/scrollPosition;
+            console.log(scrollRatio);
+            // progressLiquid.style.height = `${scrollRatio * 100}%`;
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* global */
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            font-family: "regular";
+        }
+        body{
+            background-color: rgb(35,35,35);
+        }
+        .main-container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        /* ********* */
+        div.header-container{
+            height: 50px;
+        }
+        div.header{
+            width: 1140px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: tomato;
+            border-radius: 10px;
+            border-bottom: 2px solid white;
+            border-top: 2px solid white;
+        }
+        div.header h2{
+            color: white;
+        }
+        div.form-container{
+            height: 500px;
+            margin-top: 50px;
+        }
+        div.form{
+            width: 1140px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: tomato;
+            border-radius: 10px;
+            border-bottom: 2px solid white;
+            border-top: 2px solid white;
+        }
+        div.forms{
+            width: 340px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        div.forms div.forms-inputs{
+            width: 100%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        div.forms div.forms-buttons{
+            width: 100%;
+            height: 10%;
+        }
+        p.inline-p{
+            display: inline-block;
+            margin-right: 50px;
+        }
+        div.forms-inputs h3{
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+        }
+        div.forms div.forms-buttons button{
+            padding: 3px 3px;
+            background-color: rgb(0, 0, 0);
+            font-family: "regular";
+            color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        div.forms div.forms-buttons button:hover{
+            border: 1px solid tomato;
+            background-color: rgb(255, 255, 255);
+            color: tomato;
+        }
+        div.forms-second{
+            width: 100%;
+            height: 10%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container header-container">
+        <div class="header">
+            <h2>Payment Page</h2>
+        </div>
+    </div>
+
+    <div class="main-container form-container">
+        <div class="form">
+            <div class="forms">
+                <div class="forms-inputs"  id="forms-inputs">
+                    <div>
+                        <h3>Card Number:</h3>
+                        <p>6221-0612-1887-4017</p>
+                    </div>
+                    <div>
+                        <h3>Expire date:</h3>
+                        <p class="inline-p">Year: 03</p>
+                        <p class="inline-p">Month: 08</p>
+                    </div>
+                    <div>
+                        <h3>Second password:</h3>
+                        <p>6671518</p>
+                    </div>
+                    <div>
+                        <h3>Email:</h3>
+                        <p>Somthing@yahoo.com</p>
+                    </div>
+                </div>
+                <div class="forms-buttons" id="forms-buttons">
+                    <button onclick="submit()" id="submitBtn">Submit Payment</button>
+                </div>
+                <div class="forms-second" id="forms-second">
+                    <span id="second-counter"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        // this function is for removing divs from div id="fomrs-inputs"
+        let removeDiv = function(){
+            let x = document.getElementById("forms-inputs");
+            for(i=x.childNodes.length-1;i>=0;i--){
+                x.removeChild(x.childNodes[i]);
+            }
+            x.innerHTML = `<p>Your payment was successful.<br>Please go back or wait 10 seconds.</p>`
+        }
+
+        
+        // this function is for removing the button in div id="forms-inputs" and making new button
+        let updateButton = function(){
+            let x = document.getElementById("forms-buttons");
+            let btn = document.getElementById("submitBtn");
+            x.removeChild(btn);
+            let newBtn = document.createElement("button");
+            let newBtnNode = document.createTextNode("Go back");
+            newBtn.appendChild(newBtnNode);
+            x.appendChild(newBtn);
+
+            // this is the function for the new button 
+            function newBtnFunc(){
+                window.location.assign('https://www.google.co.uk/')
+            }
+            newBtn.addEventListener("click",newBtnFunc);
+        }
+
+
+        // this part is for the second countdown
+        let remainTime = 9;
+        let countDown = function(){
+        setInterval(function(){
+            document.getElementById("second-counter").innerHTML = remainTime;
+            if(remainTime == 0){window.location.assign('https://www.google.co.uk/')}
+            remainTime-=1;
+        },1000)
+        }   
+
+
+        // this is the final function for submit
+        let submit = function(){
+            removeDiv();
+            updateButton();
+            countDown();
+        }
+    </script>
+</body>
+</html>

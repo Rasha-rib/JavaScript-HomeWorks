@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>swiffy-slider</title>
+    <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        li{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        body{
+            background-color: rgb(179, 179, 179);
+        }
+        .slider-nav{
+            color: black;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="swiffy-slider">
+        <ul class="slider-container">
+            <li><img src="https://picsum.photos/id/685/600/400" alt=""></li>
+            <li><img src="https://picsum.photos/id/686/600/400" alt=""></li>
+            <li><img src="https://picsum.photos/id/688/600/400" alt=""></li>
+            <li><img src="https://picsum.photos/id/682/600/400" alt=""></li>
+            <li><img src="https://picsum.photos/id/681/600/400" alt=""></li>
+            <li><img src="https://picsum.photos/id/689/600/400" alt=""></li>
+        </ul>
+    
+        <button type="button" class="slider-nav"></button>
+        <button type="button" class="slider-nav slider-nav-next"></button>
+    
+        <div class="slider-indicators">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+</body>
+</html>

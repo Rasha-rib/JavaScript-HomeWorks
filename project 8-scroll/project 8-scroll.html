@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            width: 100%;
+            height: 3000px;
+            background-color: rgb(56, 56, 56);
+        }
+        #header{
+            height: 60px;
+            width: 100%;
+            background-color: tomato;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            transition: 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div.nav-bar{
+            width: 1140px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 2px solid rgb(48, 48, 48);
+            border-left: 2px solid rgb(48, 48, 48);
+            border-radius: 10px;
+        }
+        div.menu{
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .menu-item{
+            vertical-align: middle;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .menu-item:hover{
+            transform: translateX(-10px);
+        }
+        .arrow{
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-right: 2px solid rgb(48, 48, 48);
+            border-top: 2px solid rgb(48, 48, 48);
+            border-top-right-radius: 2px;
+            border-top-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .menu-item:hover .arrow{
+            border-right: 2px solid rgb(48, 48, 48);
+            border-top: 2px solid rgb(48, 48, 48);
+            opacity: 1;
+            transform: rotate(-135deg);
+        }
+        div.empty{
+            width: 10%;
+        }
+        div.logo{
+            width: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body onscroll="scrollHandler(this)">
+    <div id="header">
+        <div class="nav-bar">
+            <div class="menu">
+                <a class="menu-item">HOME <span class="arrow"></span></a>
+                <a class="menu-item">ABOUT <span class="arrow"></span></a>
+                <a class="menu-item">PORTFOLIO <span class="arrow"></span></a>
+                <a class="menu-item">SERVICES <span class="arrow"></span></a>
+                <a class="menu-item">CONTACT <span class="arrow"></span></a>
+            </div>
+            <div class="empty"></div>
+            <div class="logo">
+                <span class="logo-item">XCOMPANY</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let lastPosition = document.body.scrollY;
+        function scrollHandler(element){
+
+            let location = element.scrollY-lastPosition;
+            lastPosition = element.scrollY;
+
+            if(location>0){
+                document.getElementById("header").style.top = "-60px";
+            }else{
+                document.getElementById("header").style.top = "0px";
+            }
+        }
+    </script>
+</body>
+</html>

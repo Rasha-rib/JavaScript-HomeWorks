@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="testfunc()">try</button>
+    <script>
+        let testfunc = function(){
+            setInterval(
+                function(){
+                    let w0 = window.open("https://www.google.co.uk/","_blank","height=200px,width=200px,top=0px,left=0px");
+                    let w1400 = window.open("https://www.google.co.uk/","_blank","height=200px,width=200px,top=0px,left=1400px");
+                    window.open("https://www.google.co.uk/","_blank","height=200px,width=200px,top=0px,left=0px")
+                    setTimeout(function(){w.close()},1000);
+                    window.open("https://www.google.co.uk/","_blank","height=200px,width=200px,top=0px,left=1400px")
+                    setTimeout(function(){w1400.close()},1000);
+                },2000)}
+    </script>
+</body>
+</html>

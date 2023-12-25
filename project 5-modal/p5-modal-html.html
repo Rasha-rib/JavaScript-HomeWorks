@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+<!-- ********************************************* style ********************************************* -->
+<!-- ************************************************************************************************* -->
+
+
+    <style>
+        @font-face {
+    font-family: "regular";
+    src: url("./p5-modal-fonts/Poppins-Regular.eot");
+    src: url("./p5-modal-fonts/Poppins-Regular.eot") format("embedded-opentype"),
+    url("./p5-modal-fonts/Poppins-Regular.woff") format("woff"),
+    url("./p5-modal-fonts/Poppins-Regular.woff2") format("woff2"),
+    url("./p5-modal-fonts/Poppins-Regular.ttf") format("truetype");
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+div.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.login{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background:rgb(44, 52, 162);
+    height: 100px;
+    width: 1140px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+div.button-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 100%;
+}
+#loginButton{
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: rgb(29, 19, 96);
+    color: rgb(193, 193, 193);
+    border: 2px solid rgb(29, 19, 96);
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-family: "regular";
+    transition: 1s;
+    font-size: 12px;
+}
+#loginButton:hover{
+    border: 2px solid white;
+    color: white;
+    font-size: 12px;
+    box-shadow: 0px 0px 19px 0px rgba(255,255,255,0.75);
+    background-color: rgb(83, 68, 177);
+}
+div.modal-container{
+    height: 400px;
+    width: 1140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div.modal-ribbon{
+    width: 700px;
+    height: 40px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(90, 159, 248);
+    opacity: 0;
+}
+div.modal-ribbon-button{
+    width: 5%;
+    height: 100%;
+}
+div.modal-ribbon-button button{
+    margin-top: 3px;
+    margin-left: 3px;
+    background-color: rgb(90, 159, 248);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(90, 159, 248);
+    border-radius: 5px;
+    font-family: "regular";
+    transition: 1s;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.modal-ribbon-button button:hover{
+    border: 1px solid white;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0px 0px 19px 0px rgba(255,255,255,0.75);
+    background-color: rgb(143, 189, 249);
+}
+div.modal-ribbon-span{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+div.modal-ribbon-span span{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+div.form1{
+    width: 700px;
+    height: 300px;
+    background-color: rgb(179, 193, 236);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 1s;
+    font-family: "regular";
+    opacity: 0;
+}
+div.form1-header{
+    height: 20%;
+    width: 100%;
+}
+div.form1-header h3{
+    margin-left: 5px;
+}
+div.form1-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 70%;
+    width: 100%;
+}
+div.form1-form input{
+    outline: none;
+    margin: 5px 5px;
+    border-radius: 5px;
+}
+div.form1-form label{
+    font-size: 15px;
+    margin-left: 5px;
+}
+div.form1-button{
+    height: 10%;
+    width: 100%;
+}
+div.form1-button button{
+    margin-left: 5px;
+    margin-top: -3px;
+    padding: 2px;
+    background-color: rgb(90, 159, 248);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(90, 159, 248);
+    border-radius: 5px;
+    font-family: "regular";
+    transition: 1s;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.form1-button button:hover{
+    border: 1px solid white;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0px 0px 19px 0px rgba(255,255,255,0.75);
+    background-color: rgb(143, 189, 249);
+}
+div.list-container{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1140px;
+    height: 200px;
+    background-color: rgb(40, 47, 147);
+}
+table{
+    text-align: center;
+    background-color: rgb(174, 174, 212);
+    border-radius: 10px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+table th.first-th{
+    border-top-left-radius: 10px;
+}
+table th.last-th{
+    border-top-right-radius: 10px;
+}
+table th{
+    font-family: "regular";
+    font-size: 15px;
+    color: black;
+    background: rgb(215, 215, 239);
+}
+table td{
+    font-family: "regular";
+    font-size: 14px;
+    color: black;
+}
+td,th{
+    padding: 5px 10px;
+}
+    </style>
+</head>
+
+
+<!-- ********************************************* HTML *********************************************** -->
+<!-- ************************************************************************************************** -->
+
+
+
+<body>
+    <div class="container">
+        <div class="login">
+            <div class="button-container">
+                <button id="loginButton" onclick="openModal()" >LOGIN</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-container">
+        <div class="modal-ribbon" id="ribbon">
+            <div class="modal-ribbon-button">
+                <button id="closeLogin" onclick="closeLogin()">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+             <div class="modal-ribbon-span">
+                 <span id="ribbonSpan"></span> 
+            </div> 
+        </div>
+        <div class="form1" id="form1">
+            <div class="form1-header">
+                <h3>PERSONAL INFORMATION</h3>
+            </div>
+            <div class="form1-form">
+                <form action="">
+                    <label for="">First name</label>
+                    <input type="text" id="fname"> 
+                    <label for="">Age</label>
+                    <input type="text" id="age">
+                </form>
+            </div>
+            <div class="form1-button">
+                <button onclick="addUsers()">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="list">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="first-th">Number</th>
+                        <th>Name</th>
+                        <th class="last-th">Age</th>
+                    </tr>
+                </thead>
+                <tbody id="demo">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+<!-- ********************************************* script ********************************************* -->
+<!-- ************************************************************************************************** -->
+
+
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <script>
+        let openModal = function () {
+            document.getElementById("ribbon").style.opacity = "1";
+            document.getElementById("form1").style.opacity = "1";
+        };
+        let closeLogin = function () {
+            document.getElementById("ribbon").style.opacity = "0";
+            document.getElementById("form1").style.opacity = "0";
+        };
+        let users = [{ fname: "", age: "" }];
+        let showUsers = function () {
+            document.getElementById("demo").innerHTML = "";
+            for (let i = 1; i < users.length; i++) {
+                document.getElementById("demo").innerHTML += `<tr><td>${i}</td><td>${users[i].fname}</td><td>${users[i].age}</td></tr>`;
+            }
+        };
+        let addUsers = function () {
+            let f = document.getElementById("fname").value;
+            let a = Number(document.getElementById("age").value);
+            let user = { fname: f, age: a };
+            users.push(user);
+            showUsers();
+            document.getElementById("fname") = null;
+            document.getElementById("age") = null;
+        };
+    </script>
+</body>
+</html>
