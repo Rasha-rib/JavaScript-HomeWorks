@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* global scope */
+        :root{
+            --blue: tomato;
+            --pink: #303030;
+        }
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            font-family: "regular";
+        }
+        body{
+            background-color: var(--pink);
+        }
+        div.container{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        div.input-container{
+            height: 200px;
+            width: 1140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid var(--blue);
+        }
+        [data-average]{
+            border: 2px solid var(--blue);
+            background-color: var(--blue);
+            border-radius: 7px;
+            border: 1px solid black;
+            color: white;
+            display: inline-block;
+        }
+        div.avg{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 25px;
+            width: 350px;
+        }
+        label{
+            color: var(--blue);
+            font-size: 15px;
+            border-radius: 4px;
+            transition: 0.5s;
+        }
+        label:hover{
+            border-bottom: 1px solid var(--blue);
+            color: rgb(230, 230, 230);
+            transform: translateX(5px) translateY(1px);
+        }
+        div.button-container{
+            width: 1140px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--blue);
+        }
+        #calcBtn{
+            padding: 2px 4px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid var(--pink);
+            background-color: black;
+            color: white;
+        }
+        div.result-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            width: 100%;
+            height: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-container">
+            <div class="avg">
+                <label for="avg1">Enter number:</label>
+                <input type="text" id="avg1" class="average-input" data-average>
+            </div>
+            <div class="avg">
+                <label for="avg2">Enter number:</label>
+                <input type="text" id="avg2" class="average-input" data-average>
+            </div>            
+            <div class="avg">
+                <label for="avg3">Enter number:</label>
+                <input type="text" id="avg3" class="average-input" data-average>
+            </div>            
+            <div class="avg">
+                <label for="avg4">Enter number:</label>
+                <input type="text" id="avg4" class="average-input" data-average>
+            </div>            
+            <div class="avg">
+                <label for="avg5">Enter number:</label>
+                <input type="text" id="avg5" class="average-input" data-average>
+            </div>
+        </div>
+        <div class="button-container">
+            <button id="calcBtn" onclick="inputAvg()">Calculate</button>
+        </div>
+        <div class="result-container">
+            <span id="sum-result"></span>
+            <span id="average-result"></span>
+            <span id="min-result"></span>
+            <span id="max-result"></span>
+        </div>
+    </div>
+    <script>
+        let nums = [];
+
+// This function collect numbers of inputs and put them in nums array
+        let collectValues = function(){
+            let elements = document.querySelectorAll("[data-average]");
+            for(let i = 0 ; i<elements.length ; i++){
+                nums.push(parseFloat(elements[i].value));
+            }
+        }
+
+// This function calculate min of nums
+        let calcMin = function(){
+            collectValues();
+            let min = nums[0];
+            for(let i = 1 ; i<nums.length ; i++){
+                if(min > nums[i]){min = nums[i];}
+            }
+            return min;
+        }
+
+
+// This function calculate max of nums
+let calcMax = function(){
+            collectValues();
+            let max = nums[0];
+            for(let i = 1 ; i<nums.length ; i++){
+                if(max < nums[i]){max = nums[i];}
+            }
+            return max;
+        }
+
+// This function return the average of nums array
+        let inputAvg = function(){
+            collectValues();
+            let avgResult = null;
+            for(let i = 0 ; i<nums.length ; i++){
+                avgResult += nums[i];
+            }
+            let finalAverage = (Number(avgResult/nums.length));
+            document.getElementById("average-result").innerText = `Average = ${finalAverage}`;
+            document.getElementById("sum-result").innerText = `Sum = ${avgResult}`;
+            let minX = calcMin();
+            document.getElementById("min-result").innerText = `min = ${minX}`;
+            let maxX = calcMax();
+            document.getElementById("max-result").innerText = `max = ${maxX}`;
+        }
+
+    </script>
+</body>
+</html>
