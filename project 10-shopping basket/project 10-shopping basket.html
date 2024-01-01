@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shopping basket</title>
+    <style>
+        :root{
+            --tomato: tomato;
+            --gray: #303030;
+        }
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            font-family: "regular";
+        }
+        body{
+            background-color: var(--gray);
+        }
+        div.filter-container{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div.inputs{
+            width: 1140px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-around;
+        }
+        div.inputs input{
+            background-color: var(--tomato);
+            color: white;
+            outline: none;
+        }
+        div.inputs input::placeholder{
+            color: white;
+            opacity: 0.7;
+            font-size: 11px;
+        }
+        .container{
+            width: 100%;
+            height: 1000px;
+            background-color: var(--tomato);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+
+        .item-container{
+            border-bottom: 3px solid var(--gray);
+            border-radius: 5px;
+            width: 1140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .item-container h3{
+            border: 2px solid var(--gray);
+            padding: 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(30,30,30,0.75);
+            transition: 0.5s;
+        }
+        .item-container span.p-id{
+            border-bottom: 2px solid var(--gray);
+            border-radius: 3px;
+            margin-bottom: 30px;
+        }
+        .item-container button{
+            padding: 1px 5px;
+            background-color: var(--gray);
+            border-radius: 5px;
+            color: white;
+            border: 1px solid var(--gray);
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .item-container button:hover{
+            border: 1px solid rgb(255, 255, 255);
+            box-shadow: 0px 0px 30px 0px rgba(255,255,255,0.75);
+            background-color: white;
+            color: black;
+        }
+        div.result-container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            width: 100%;
+        }
+        div.result-container ul{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="filter-container">
+        <div class="inputs">
+            <input type="text" placeholder="Maximum Price.." id="maxPriceInput" onkeyup="updateBox()">
+            <input type="text" placeholder="Minimum Price.." id="minPriceInput" onkeyup="updateBox()">
+        </div>
+    </div>
+    <div class="container" id="container">
+
+    </div>
+    <div class="result-container" id="result-container">
+        <ul id="cartResult">
+
+        </ul>
+    </div>
+    <script>
+// This is the array we use it in order to fill it with added items
+        let cart =  [];
+
+        let products = [
+            {id:125 , title:"product1" , color:"red" , price:25000},
+            {id:225 , title:"product2" , color:"blue" , price:15000},
+            {id:178 , title:"product3" , color:"green" , price:80000},
+            {id:143 , title:"product4" , color:"red" , price:130000}
+        ]
+
+// This is the function that get item from products array and put them in the div id="container">div id="item-container"
+        let fillBox = function(item){
+            let parent = document.getElementById("container");
+            parent.innerHTML = "";
+        for(let i = 0 ; i<item.length ; i++){
+            parent.innerHTML = parent.innerHTML + `
+            <div class="item-container">
+                <span class="p-id">Product ID = ${item[i].id}</span>
+                <h3>Product Title = ${item[i].title}</h3>
+                <br>
+                <span>Product Color = ${item[i].color}</span> 
+                <span>Product Price = ${item[i].price}</span> 
+                <br>
+                <div>
+                <button onclick=(addToCart(${item[i].id}))>Add to Cart</button>
+                <button onclick=(removeFromCart(${item[i].id}))>Delete from Cart</button>   
+                </div>
+            </div>
+            `
+        }
+        }
+
+    fillBox(products);
+// This is the function that get the products from input and price filter array
+        let updateBox = function(){
+            let maxPrice = Number(document.getElementById("maxPriceInput").value);
+            let minPrice = Number(document.getElementById("minPriceInput").value);
+            console.log(maxPrice);
+            console.log(minPrice);
+            let pf = products.filter(function(item){
+                if(minPrice==0 && maxPrice==0){
+                    return true;
+                }else if(minPrice==0 && maxPrice!=0){
+                    return item.price<maxPrice;
+                }else if(maxPrice==0 && minPrice!=0){
+                    return item.price>minPrice;
+                }else{
+                    return item.price>minPrice && item.price<maxPrice;
+                }
+        });
+        fillBox(pf);
+        };
+
+        let addToCart = function(id){
+            // In here we find the member number of the product that we add
+            let productIndex = products.findIndex(function(item){
+                return item.id == id;
+            });
+            // In here we try to find if the member that we add, is new or it has been already added
+            let cartIndex = cart.findIndex(function(item){
+                return item.product_id == id;
+            });
+            // if member number[cartIndex] wasnt exist, push it, else plus one to its count
+            if(cartIndex == -1){
+                cart.push({
+                count:1,
+                product_title: products[productIndex].title,
+                product_id: products[productIndex].id,
+                product_price: products[productIndex].price,
+            });
+            }else{
+                cart[cartIndex].count += 1;
+            }
+            updateCart();
+        };
+        
+        let removeFromCart = function(id){
+            let cartIndex = cart.findIndex(function(item){
+                return item.product_id == id;
+            });
+            // first we try to findout wether the product exist or not
+            if(cartIndex == -1){
+                alert('The product is not in your shopping cart!');
+                // Then if we had more than 1, we simply decrese its count, however if we had 1 we have to delete that with splice method
+            }else{
+                if(cart[cartIndex].count>1){
+                    cart[cartIndex].count -= 1;
+                }else if(cart[cartIndex].count == 1){
+                    cart.splice(cartIndex, 1);
+                }
+            }
+            updateCart();
+        };
+
+        let updateCart = function(){
+            document.getElementById("cartResult").innerHTML="";
+            totalPrice = 0;
+            cart.forEach((item)=>{
+                document.getElementById("cartResult").innerHTML+= 
+                `<li>
+                    Item Title: ${item.product_title} - Item count: ${item.count} - Item price: ${item.product_price*item.count}    
+                </li>`;
+                totalPrice = totalPrice + (item.product_price*item.count);
+                // document.getElementById("cartResult").innerHTML+= 
+                // `<li>
+                //     Total price of item ${item.product_title}: ${totalPrice}    
+                // </li>`;
+            });
+            document.getElementById("cartResult").innerHTML+= 
+                `<li>
+                    Total price: ${totalPrice}    
+                </li>`;
+        };
+    </script>
+</body>
+</html>
