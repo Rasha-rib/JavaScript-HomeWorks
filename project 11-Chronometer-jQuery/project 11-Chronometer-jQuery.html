@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FAQ</title>
     <style>
+        /* Global Part */
         :root{
-            --blue : #3040fa;
+            --blue: #3040fa;
         }
         *{
             box-sizing: border-box;
@@ -15,81 +16,112 @@
         }
         body{
             background-color: var(--blue);
+            font-family: "regular";
+            font-size: 14px;
         }
-        div.chronometer-container{
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+
+        /* FAQ part */
+        div.faq-container{
             width: 100%;
-            height: 300px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        div.chronometer{
-            background-color: white;
-            width: 300px;
-            height: 250px;
+        div.faq{
+            width: 1140px;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid black;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+        div.q-a{
+            width: 100%;
+            height: 80px;
+            background-color: rgb(255, 255, 255);
+            position: relative;
             border-radius: 10px;
-            box-shadow: 0px 0px 15px 0px black;
-            transition: 0.5s;
-        }
-        div.numbers{
-            border-bottom: 1px solid black;
-            border-top: 1px solid black;
-            border-radius: 5px;
-            width: 100%;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        button{
-            cursor: pointer;
-            padding: 3px 10px;
-            background-color: var(--blue);
-            color: white;
-            border: 1px solid white;
-            border-radius: 8px;    
-            transition: 0.5s;
-        }
-        button:hover{
-            background-color: darkblue;
-            border: 1px solid black;
+            padding: 5px;
+            margin: 5px 0px;
             box-shadow: 0px 0px 15px 0px black;
         }
-        div.capture-list-container{
-            width: 100%;
-            height: 500px;
+        div.q{
+            width: 99%;
+            height: 30px;
+            border:2px solid #3040fa;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
+            border-radius: 10px;
+            padding: 5px;
+            position: absolute;
+            top: 5px;
+            transition: 0.5s;
         }
-        div.capture-list{
+        div.a{
+            width: 99%;
+            height: 30px;
+            border:2px solid #3040fa;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            position: absolute;
+            border-radius: 10px;
+            padding: 5px;
+            top: 45px;
+        }
+        div.q span{
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            border-right: 3px solid var(--blue);
+            border-top: 3px solid var(--blue);
+            border-radius: 2px;
+            transform: rotate(45deg);
+            transition: 0.5s;
         }
     </style>
 </head>
 <body>
-    <div class="chronometer-container">
-        <div class="chronometer">
-            <div class="numbers">
-                <span id="hour"></span> : <span id="minute"></span> : <span id="second"></span>
+    <div class="faq-container">
+        <div class="faq">
+            <div class="q-a">
+                <div class="q">
+                    What are we selling?
+                    <span class="arrow"></span>
+                </div>
+                <div class="a">We are selling something in this website.</div>
             </div>
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <button id="reset">Reset</button>
-            <button id="capture">Capture</button>
-        </div>
-    </div>
-    <div class="capture-list-container">
-        <div class="capture-list">
-            <ul id="list"></ul>
+            <div class="q-a">
+                <div class="q">
+                    How can i purchase an item?
+                    <span class="arrow"></span>
+                </div>
+                <div class="a">By making use of our website.</div>
+            </div>
+            <div class="q-a">
+                <div class="q">
+                    Does your company have customer support?
+                    <span class="arrow"></span>
+                </div>
+                <div class="a">Yes.</div>
+            </div>
+            <div class="q-a">
+                <div class="q">
+                    Does your shop have discount?
+                    <span class="arrow"></span>
+                </div>
+                <div class="a">Right now no.</div>
+            </div>
         </div>
     </div>
 
@@ -97,59 +129,31 @@
     <script src="./jquery-color-3.6.1.js"></script>
     <script>
         $(document).ready(function(){
-  
-            let h = 0;
-            let m = 0;
-            let s = 0;
-            let chInterval = null;
-            let captures = [];
 
-            let updateCh = function(){
-                $("#second").html((s<10)?`0${s}`:`${s}`);
-                $("#minute").html((m<10)?`0${m}`:`${m}`);
-                $("#hour").html((h<10)?`0${h}`:`${h}`);
-            };
-            let countCh = function(){
-                s++;
-                if(s>60){
-                    m++;
-                    s = 0;
-                }
-                if(m>60){
-                    h++;
-                    m=0;
-                }
-                updateCh()
-            };
+            $("div.a").hide();
 
-            $("#start").click(function(){
-                if(chInterval == null){
-                chInterval = setInterval(countCh,1000);
+            $("div.q").click(function(){
+                $(this).next().slideToggle();
+                let questionSlide = $(this);
+                let answerSlide = $(this).next();
+                if(answerSlide.height()>1){
+                    $(this).find(".arrow").css({"transform":"rotate(45deg)"});
+                    $(this).find(".arrow").css({"border-right": "3px solid var(--blue)"});
+                    $(this).find(".arrow").css({"border-top": "3px solid var(--blue)"});
+                    questionSlide.css({"background-color":"white"});
+                    questionSlide.css({"box-shadow":"0px 0px 0px 0px black"});
+                    questionSlide.css({"color":"black"});
+                }else{
+                    $(this).find(".arrow").css({"transform":"rotate(135deg)"});
+                    $(this).find(".arrow").css({"border-right": "3px solid white"});
+                    $(this).find(".arrow").css({"border-top": "3px solid white"});
+                    questionSlide.css({"background-color":"var(--blue)"});
+                    questionSlide.css({"box-shadow":"0px 0px 10px 0px black"});
+                    questionSlide.css({"color":"white"});
                 }
-            });
-            $("#stop").click(function(){
-                clearInterval(chInterval);
-                chInterval = null;
-            });
-            $("#reset").click(function(){
-                clearInterval(chInterval);
-                chInterval = null;
-                h = 0;
-                m = 0;
-                s = 0;
-                updateCh();
-            });
-            $("#capture").click(function(){
-                let captureTime = `${h} : ${m} : ${s}`;
-                captures.push(captureTime);
-                let x = $("#list").html();
-                x ="";
-                for(let i = 0 ; i<captures.length ; i++){
-                $("#list").html(x+=`
-                <li>${captures[i]}</li>
-                `);
-                }
-            });
+            })
+
+
         });
     </script>
 </body>
