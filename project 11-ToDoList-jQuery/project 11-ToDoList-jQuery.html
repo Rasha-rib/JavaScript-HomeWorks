@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <style>
+         /* Global Part */
+         :root{
+            --blue: #3040fa;
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: var(--blue);
+            font-family: "regular";
+            font-size: 14px;
+        }
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+
+        /* ToDoList part */
+        div.list-container{
+            width: 100%;
+            height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        div.list{
+            width: 1140px;
+            height: 800px;
+            background-color: white;
+            border-radius: 20px;
+            border-left: 2px solid black;
+            border-right: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        div.input-part{
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border-right: 2px solid var(--blue);
+        }
+        div.input-part h2{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            border-bottom: 2px solid black;
+        }
+        div.input-part input{
+            width: 250px;
+            height: 30px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            border: 1px solid black;
+            outline: none;
+            border-radius: 5px;
+        }
+        div.input-part input::placeholder{
+            font-family: "regular";
+            color: black;
+            font-size: 14px;
+            padding: 5px;
+        }
+        div.input-part button{
+            margin-left: 10px;
+            padding: 5px 20px;
+            border: 1px solid var(--blue);
+            background-color: var(--blue);
+            color: white;
+            font-family: "regular";
+            font-size: 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        div.input-part button:hover{
+            background-color: white;
+            color: var(--blue);
+            border: 1px solid var(--blue);
+            box-shadow: 0px 0px 15px 0px var(--blue);
+        }
+        
+        /* Task part */
+        div.data-part{
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        div.task-container{
+            width: 700px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        div.task-container-left{
+            width: 20%;
+            height: 100%;
+            background-color: var(--blue);
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        div.task-container-left h2{
+            border-bottom: 1px solid black;
+            width: 50px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        div.task-container-middle{
+            width: 70%;
+            height: 100%;
+            background-color: var(--blue);
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        div.task-container-middle h2{
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid black;
+        }
+        div.task-container-middle p{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        div.task-container-right{
+            width: 10%;
+            height: 100%;
+            background-color: var(--blue);
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        div.task-container-right button{
+            border: 1px solid black;
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            background-color: var(--blue);
+            transition: 0.5s;
+            cursor: pointer;
+        }
+        div.task-container-right button:hover{
+            border: 1px solid white;
+            background-color: white;
+            box-shadow: 0px 0px 15px 5px white;
+        }
+        div.task-container-right button#delete img,div.task-container-right button#check img{
+            width: 25px;
+            height: auto;
+            margin-top: 15px;
+            margin-bottom: 15px;      
+        }
+    </style>
+</head>
+<body>
+    <div class="list-container">
+        <div class="list">
+            <div class="input-part">
+                <h2>Enter Data:</h2>
+                <input type="text" placeholder="Enter task name.." class="first">
+                <input type="text" placeholder="Enter your task description.." class="second">
+                <button id="saveBtn">Save</button>
+            </div>
+            <div class="data-part">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="./jquery-minified-3.7.1.js"></script>
+    <script src="./jquery-color-3.6.1.js"></script>
+    <script>
+        
+        $(document).ready(function(){
+            
+            
+            
+// START - SAVE BUTTON FUNCTIONS
+            
+
+            let pushInputValue = function(){
+                let tasks="";
+                let taskNameValue = $("input.first").val();
+                let taskDescriptionValue = $("input.second").val();
+                let newTask = {taskName:taskNameValue , description:taskDescriptionValue};
+                $("input.first").val("");
+                $("input.second").val("");
+                tasks.push(newTask);
+            };
+
+            let addItem = function(){
+                $("div.data-part").empty();
+                for(let i = 0 ; i<tasks.length ; i++){
+                    $("div.data-part").append(`
+                    <div class="task-container">
+                        <div class="task-container-left">
+                            <h2>${i+1}</h2>
+                            <h3>Task Name:</h3>
+                            <h4>${tasks[i].taskName}</h4>
+                        </div>
+                        <div class="task-container-middle">
+                            <h2>Description:</h2>
+                            <p>${tasks[i].description}</p>
+                        </div>
+                        <div class="task-container-right">
+                            <button id="delete"><img src="./icons/delete-30.png" alt=""></button>
+                            <button id="check"><img src="./icons/check-50.png" alt=""></button>
+                        </div>
+                    </div>
+                    `);
+                };
+            };
+
+            $("#saveBtn").click(function(){
+                pushInputValue();
+                addItem();
+            });
+        });
+// END - SAVE BUTTON FUNCTIONS
+
+    </script>
+</body>
+</html>
