@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         /* Global Part */
+         :root{
+            --blue: #3040fa;
+        }
+        *{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: var(--blue);
+            font-family: "regular";
+            font-size: 14px;
+        }
+        @font-face {
+            font-family: "regular";
+            src: url("./opensans/opensans.eot");
+            src: url("./opensans/opensans.eot") format("embedded-opentype"),
+            url("./opensans/opensans.woff") format("woff"),
+            url("./opensans/opensans.woff2") format("woff2"),
+            url("./opensans/opensans.ttf") format("truetype");
+        }
+        div.container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div.input-container{
+            width: 1140px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div.inputs{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border: 2px solid black;
+            border-radius: 10px;
+            color: white;
+            position: relative;
+        }
+        input.regex-input{
+            width: 250px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: white;
+            outline: none;
+            border: 2px solid var(--blue);
+            padding: 5px;
+            transition: 0.5s;
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        input.regex-input:focus{
+            border: 2px solid black;
+        }
+        input.regex-input:focus::placeholder{
+            color: black;
+        }
+        input.regex-input::placeholder{
+            font-family: "regular";
+            color: black;
+        }
+        div.phone-error{
+            width: 250px;
+            height: 30px; 
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 10px;
+        }
+        div.phone-error p{
+            color: black;
+            transition: 0.5s;
+        }
+        div.errors{
+            height: 100%;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-container">
+            <div class="inputs">
+                <input type="text" class="regex-input" placeholder="Enter you lastname..." data-regex="lastname">
+                <div class="phone-error">
+                    <p><b>Your last name is not valid!</b></p>
+                </div>
+                <input type="text" class="regex-input" placeholder="Enter you name..." data-regex="name">
+                <div class="phone-error">
+                    <p><b>Your name is not valid!</b></p>
+                </div>
+                <input type="text" class="regex-input" placeholder="Enter you Phone Number..." data-regex="phone_number">
+                <div class="phone-error">
+                    <p><b>Your phone number is not valid!</b></p>
+                </div>
+                <input type="text" class="regex-input" placeholder="Enter you email..." data-regex="email">
+                <div class="phone-error">
+                    <p><b>Your email is not valid!</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./jquery-minified-3.7.1.js"></script>
+    <script>
+        $("input[data-regex]").keyup(function(){
+            
+            let regex = null;
+            let regType = $(this).attr("data-regex");
+            inputVal = $(this).val();
+            let validation = function(){
+                
+            }
+
+            if(regType == "lastname"){
+                regex = /^[a-z A-Z]{3,100}$/;
+                if(regex.test(inputVal)){
+                    $(this).next().hide();
+                }else{
+                    $(this).next().show();
+                };
+            }
+
+            if(regType == "name"){
+                regex = /^[a-z A-Z]{3,100}$/;
+                if(regex.test(inputVal)){
+                    $(this).next().hide();
+                }else{
+                    $(this).next().show();
+                };
+            } 
+
+            if(regType == "phone_number"){
+                regex = /^(0|\+98)?9[0-9]{9}$/;
+                if(regex.test(inputVal)){
+                    $(this).next().hide();
+                }else{
+                    $(this).next().show();
+                };
+            }    
+
+            if(regType == "email"){
+                regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(regex.test(inputVal)){
+                    $(this).next().hide();
+                }else{
+                    $(this).next().show();
+                };
+            };
+ 
+
+        });
+    </script>
+</body>
+</html>
