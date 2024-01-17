@@ -1,0 +1,222 @@
+ /* Global Part */
+ :root{
+    --white: #ffffff;
+    --black: #000000;
+    --blue: #3040fa;
+    /* for plugin */
+    --ti-cursor-color: rgb(255, 255, 255);
+    --ti-cursor-font-style: "regural";
+    --ti-cursor-font-size: 30px;
+
+}
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: var(--blue);
+    font-family: "regular";
+    font-size: 14px;
+}
+@font-face {
+    font-family: "regular";
+    src: url("./opensans/opensans.eot");
+    src: url("./opensans/opensans.eot") format("embedded-opentype"),
+    url("./opensans/opensans.woff") format("woff"),
+    url("./opensans/opensans.woff2") format("woff2"),
+    url("./opensans/opensans.ttf") format("truetype");
+}
+@font-face {
+    font-family: "parastoo";
+    src: url("./parasto/Parastoo.eot");
+    src: url("./parasto/Parastoo.eot") format("embedded-opentype"),
+    url("./parasto/Parastoo.woff") format("woff"),
+    url("./parasto/Parastoo.woff2") format("woff2"),
+    url("./parasto/Parastoo.ttf") format("truetype");
+}
+
+
+/* START - PROGRESSBAR */
+div.progressbar-container{
+    width: 100%;
+    height: 5px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+div.container{
+    width: 1140px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+div.progressbar{
+    width: 0px;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 10px;
+    transition: 0.5s;
+}
+/* END - PROGRESSBAR */
+
+
+/* START - NAVBAR PART */
+div.navbar-container{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 5px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease-in-out;
+}
+div.navbar{
+    width: 1140px;
+    height: 80px;
+    background-color: var(--white);
+    border-radius: 10px;
+}
+/* END - NAVBAR PART */
+
+
+/* START - WELCOME TYPE PART */
+div.welcome-text{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    transition: 0.5s;
+}
+div.welcome-text p{
+    color: var(--white);
+    font-size: 30px;
+}
+/* END - WELCOME TYPE PART */
+
+/* START - SIDENAV LEFT PART */
+div.sidenav-left-container{
+    position: fixed;
+    z-index: 2;
+    top: 100px;
+    left: -240px;
+    width: 300px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease-in-out;
+}
+div.sidenav{
+    width: 240px;
+    height: 100%;
+    border: 1px solid var(--black);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: var(--white);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+div.sidenav h3{
+    border: 1px solid var(--black);
+    padding: 2px 5px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-bottom: 10px;
+}
+div.sidenav h3:hover{
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+div.sidenav input{
+    outline: none;
+    border: 1px solid var(--black);
+    padding: 5px;
+    width: 200px;
+    border-radius: 5px;
+    transition: 0.5s;
+    font-family: "parastoo";
+    font-size: 11px;
+    text-align: right;
+}
+div.sidenav input:focus{
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+div.datepicker-plot-area{
+    font-family: "parastoo";
+    margin-top: 5px;
+    border: 1px solid var(--black);
+    border-radius: 5px;
+}
+.datepicker-plot-area .datepicker-day-view .table-days td span{
+    transition: 0.5s;
+}
+.datepicker-plot-area .datepicker-day-view .table-days td span:hover{
+    background-color: var(--blue);
+}
+.datepicker-plot-area .datepicker-day-view .table-days td.selected span{
+    border-radius: 50%;
+    background-color: var(--blue);
+}
+div.sidenav-handler{
+    width: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+div.sidenav-handler span.top-curve{
+    display: inline-block;
+    background-color: var(--white);
+    border-top: 1px solid var(--black);
+    border-right: 1px solid var(--black);
+    width: 50px;
+    height: 20px;
+    border-top-right-radius: 20px;
+}
+div.sidenav-handler span.center-part{
+    display: inline-block;
+    background-color: var(--white);
+    width: 50px;
+    height: 50px;
+    border-right: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.sidenav-handler span.center-part img{
+    width: 30px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+div.sidenav-handler span.center-part img:hover{
+    transform: scale(1.1);
+}
+div.sidenav-handler span.bottom-curve{
+    display: inline-block;
+    background-color: var(--white);
+    width: 50px;
+    height: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom: 1px solid var(--black);
+    border-right: 1px solid var(--black);
+}
+/* END - SIDENAV LEFT PART */
